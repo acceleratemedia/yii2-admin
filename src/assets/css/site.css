@@ -1,0 +1,272 @@
+body{
+    background-color: #eee;
+}
+footer{
+    padding: 10px 0;
+    color:rgba(255, 255, 255, 0.5);
+}
+/* Grid View */
+.table-bordered th, .table-bordered td, .table thead th{
+    border-color: #a8b4bd;
+}
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: "\f15e";
+}
+
+a.desc:after {
+    content: "\f15d";
+}
+
+.sort-numerical a.asc:after {
+    content: "\f163";
+}
+
+.sort-numerical a.desc:after {
+    content: "\f162";
+}
+
+.grid-view td {
+    white-space: nowrap;
+}
+
+.grid-view .filters input,
+.grid-view .filters select {
+    min-width: 50px;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* Top Nav Styles */
+#top-nav{
+    padding: 0 1rem;
+}
+#top-nav .navbar-nav{
+    flex-direction:row;
+}
+#top-nav .navbar-nav .nav-item{
+    padding-left:10px; 
+    padding-right:10px;
+}
+.nav li > form > button.logout {
+    border: none;
+}
+
+.nav > li > form > button.logout:focus,
+.nav > li > form > button.logout:hover {
+    text-decoration: none;
+}
+
+.nav > li > form > button.logout:focus {
+    outline: none;
+}
+
+.nav > li .btn-link{
+    color:rgba(255, 255, 255, 0.5);
+}
+
+.nav > li .btn-link:hover{
+    color:rgba(255, 255, 255, 0.75);
+}
+
+/* Toolbar Styles */
+.btn-toolbar .btn{
+    margin-left:10px;
+}
+/**
+ * START STYLE FROM https://bootstrapious.com/p/bootstrap-sidebar
+ */
+/* ---------------------------------------------------
+    SIDENAV STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
+#sidenav-sm-maximize-btn{
+    display:none;
+}
+#sidenav ul {
+    padding-left:0;
+}
+#sidenav li {
+    list-style: none;
+}
+.sidenav-size-toggler i{
+    border: 1px solid;
+    border-radius: 14px;
+    padding: 3px;
+    font-size: .75rem;
+    cursor:pointer;
+}
+a[data-toggle="collapse"] {
+    position: relative;
+    cursor:pointer;
+}
+
+#sidenav {
+    min-width: 200px;
+    max-width: 200px;
+    transition: all 0.3s;
+}
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+#sidenav ul ul a {
+    padding-left: 30px !important;
+}
+#sidenav ul li a i {
+    margin: 0 10px;
+}
+
+#sidenav.lg-minimized {
+    min-width: 40px;
+    max-width: 40px;
+    text-align: center;
+}
+#sidenav.lg-minimized .text{
+    display:none;
+}
+#sidenav.lg-minimized ul li a i {
+    margin: 0;
+}
+#sidenav.lg-minimized .dropdown-toggle::after {
+    display:none;
+}
+#sidenav.lg-minimized .nav-item{
+    position:relative;
+}
+#sidenav.lg-minimized ul li ul{
+    position: absolute;
+    margin-left: 40px;
+    background-color: #343a40 !important;
+    top: 0;
+    width:200px;
+    z-index: 10;
+}
+#sidenav.lg-minimized ul ul a{
+    padding-left: 0 !important;
+}
+/* ---------------------------------------------------
+    PAGE STYLE
+----------------------------------------------------- */
+
+#page {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+    #sidenav-lg-minimize-btn{
+        display:none;
+    }
+    #sidenav-sm-maximize-btn{
+        display:block;
+    }
+    #sidenav {
+        min-width: 40px;
+        max-width: 40px;
+        text-align: center;
+    }
+    #sidenav .text{
+        display:none;
+    }
+    #sidenav ul li a i {
+        margin: 0;
+    }
+    #sidenav .dropdown-toggle::after {
+        display:none;
+    }
+    #sidenav .nav-item{
+        position:relative;
+    }
+    #sidenav ul li ul{
+        position: absolute;
+        margin-left: 40px;
+        background-color: #343a40 !important;
+        top: 0;
+        width:200px;
+    }
+    #sidenav ul ul a{
+        padding-left: 0 !important;
+    }
+
+    #sidenav.sm-maximized {
+        min-width: 200px;
+        max-width: 200px;
+        text-align: left;
+    }
+    #sidenav.sm-maximized .text{
+        display:inline;
+    }
+    #sidenav.sm-maximized ul li a i {
+       margin: 0 10px;
+    }
+    #sidenav.sm-maximized ul li ul{
+        position: relative;
+        margin-left: 0;
+        width: auto;
+    }
+    #sidenav.sm-maximized ul ul a {
+        padding-left: 30px !important;
+    }
+    /** Copeid from default bootstrap style to re-apply to maximized smallscreener */
+    #sidenav.sm-maximized .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: "";
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+    #sidenav.sm-maximized .dropdown-toggle::after {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+    }
+}
+/**
+ * END STYLE FROM https://bootstrapious.com/tutorial/sidenav/index4.html
+ */
