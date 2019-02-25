@@ -11,7 +11,7 @@ class AppAsset extends AssetBundle
 {
     public $sourcePath = __DIR__;
     public $css = [
-        'css/site.css',
+        'css/admin.css',
         'https://use.fontawesome.com/releases/v5.4.1/css/all.css'
     ];
     public $depends = [
