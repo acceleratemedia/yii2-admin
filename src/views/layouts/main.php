@@ -36,25 +36,25 @@ AppAsset::register($this);
     ?>
     <div id="page">
         <?php 
-        if(isset($this->params['form'])){
+        if($this->form){
             // --- This mimics what is in ActiveForm::run() to begin the form
             // --- The key part of this is that the form should already be registered during the action
             // --- based on whether or not we want the view will be a form
-            echo Html::beginForm($this->params['form']->action, $this->params['form']->method, $this->params['form']->options);
+            echo Html::beginForm($this->form->action, $this->form->method, $this->form->options);
         }
-        if(isset($this->params['toolbar'])){
-            $toolbarClass = ArrayHelper::remove($this->params['form'], 'class', Toolbar::class);
-            echo $toolbarClass::widget($this->params['toolbar']);
+        if($this->toolbar){
+            $toolbarClass = ArrayHelper::remove($this->form, 'class', Toolbar::class);
+            echo $toolbarClass::widget($this->toolbar);
         }
         echo Alert::widget();
         
         echo $content;
         
-        if(isset($this->params['form'])){
+        if(isset($this->form)){
             // --- This mimics what is in ActiveForm::run() to end the form. We register the client scripts
             // --- which should implement all of the validation and scripts compiled in the view
-            if ($this->params['form']->enableClientScript) {
-                $this->params['form']->registerClientScript();
+            if ($this->form->enableClientScript) {
+                $this->form->registerClientScript();
             }
             echo Html::endForm();
         }
