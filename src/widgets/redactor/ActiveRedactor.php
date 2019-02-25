@@ -29,11 +29,35 @@ class ActiveRedactor extends Widget
      */
     public function run()
     {
+        $this->registerInlineCss();
         return $this->render('active_redactor', [
             'form' => $this->form,
             'model' => $this->model,
             'attribute' => $this->attribute
         ]);
+    }
+
+    /**
+     * Registers the inline CSS to the page for the redactor
+     * @return void
+     */
+    public function registerInlineCss()
+    {
+        $css = <<<CSS
+.redactor-container {
+    max-height: 500px;
+    overflow: auto;
+    margin-bottom: 30px;
+}
+.redactor-box ~ .invalid-feedback{
+    display:block;
+}
+.is-invalid ~ .redactor-editor{
+    display:none;
+}
+CSS;
+
+        $this->getView()->registerCss( preg_replace('/\s+/', '', $css) );
     }
 }
 ?>
