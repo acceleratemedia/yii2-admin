@@ -4,7 +4,6 @@
 /* @var $content string */
 
 
-use bvb\admin\assets\AppAsset;
 use bvb\admin\widgets\CollapsibleSideNav;
 use bvb\admin\widgets\TopNavBar;
 use bvb\admin\widgets\Toolbar;
@@ -12,7 +11,7 @@ use common\widgets\Alert;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-AppAsset::register($this);
+$this->assetBundle::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

@@ -2,6 +2,7 @@
 
 namespace bvb\admin\web;
 
+use bvb\admin\assets\AppAsset;
 use kartik\form\Activeform;
 
 /**
@@ -27,4 +28,13 @@ class View extends \yii\web\View
      * @var \kartik\form\ActiveForm
      */
     public $toolbar;
+
+    /**
+     * The name of the asset bundle which will be registered in the layout file. By default it uses the
+     * asset bundle packaged with this admin theme. If you need additional CSS files to be rendered
+     * you may create your own AssetBundle class and the 'depends' property you can include the
+     * bvb\admin\asset\AppAsset bundle to keep loading this
+     * @var string
+     */
+    public $assetBundle = AppAsset::class;
 }
