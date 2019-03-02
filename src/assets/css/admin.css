@@ -270,3 +270,60 @@ a[data-toggle="collapse"] {
 /**
  * END STYLE FROM https://bootstrapious.com/tutorial/sidenav/index4.html
  */
+
+
+ /** Display for slugs next to names */
+.slug-container{
+    padding-top:3px;
+}
+.kv-form-bs4 .has-success.highlight-addon.slug-field-container .input-group-text{
+    background-color:inherit;
+    color:inherit;
+}
+.slug-container input.form-control{
+    border-radius:3px !important;
+    display:none;
+    flex: .5 1 auto !important;
+    font-size:.8rem;
+    height: calc(1.125rem + 2px);
+    padding:3px;
+    margin-top:3px;
+    width:30%;
+}
+.slug-container .input-group{
+    width:auto;
+}
+.name-slug-container{
+    margin-bottom:10px;
+}
+
+.name-slug-container label{
+    display:none;
+}
+.slug-field-container .input-group-text{
+    padding-left: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: inherit;
+    border:none;
+}
+.slug-field-container{
+    display: flex;
+}
+.slug-field-container .invalid-feedback{
+    width:auto;
+}
+.slug-container a.btn{
+    background-color:#e9ecef;
+    border: 1px solid #ced4da;
+}
+.slug-container .input-group-text, .slug-container .btn{
+    font-size:.8rem;
+}
+.name-slug-container .input-group-text .btn-light{
+    border-color: rgb(226, 230, 234);
+    padding: 0.125rem 0.25rem;
+    font-size: 0.6275rem;
+}
+.name-slug-container .name-container .form-group{
+    margin-bottom: 0;
