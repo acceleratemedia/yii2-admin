@@ -184,12 +184,16 @@ a[data-toggle="collapse"] {
 ----------------------------------------------------- */
 
 #page {
-    width: 100%;
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
 }
-
+#sidenav + #page{
+    width: calc(100% - 200px);
+}
+#sidenav.lg-minimized + #page{
+    width: calc(100% - 40px);
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
