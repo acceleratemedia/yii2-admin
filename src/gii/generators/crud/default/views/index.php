@@ -12,6 +12,7 @@ $nameAttribute = $generator->getNameAttribute();
 echo "<?php\n";
 ?>
 
+use bvb\admin\grid\ActionColumn;
 use yii\helpers\Html;
 use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
 
@@ -53,7 +54,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 ?>
 
             [
-                'class' => 'common\grid\ActionColumn',
+                'class' => ActionColumn::class,
                 'template' => '{update} {delete}'
             ],
         ],
