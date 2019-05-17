@@ -17,8 +17,7 @@ class GridView extends \yii\grid\GridView
     {
         $summary = parent::renderSummary();
         if(!empty($summary) && !empty($this->filterModel)){ // --- Also make sure the filter model is set because without it we can't render the dropdown
-            $summary = strip_tags($summary, '<b>');
-            $summary .=  ' Items per page: '.$this->getItemsPerPageDropown();
+            $summary .=  '&nbsp; Items per page: '.$this->getItemsPerPageDropown();
             $summary = '<div class="summary form-inline">'.$summary.'</div>';
         }
         return $summary;
