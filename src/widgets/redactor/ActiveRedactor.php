@@ -47,6 +47,8 @@ class ActiveRedactor extends Widget
 .redactor-container {
     max-height: 500px;
     overflow: auto;
+}
+.redactor-field-container{
     margin-bottom: 30px;
 }
 .redactor-box ~ .invalid-feedback{
