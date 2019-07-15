@@ -11,11 +11,12 @@ use yii\helpers\Html;
 class ActionColumn extends \yii\grid\ActionColumn
 {
     /**
-     * Initializes the default button rendering callbacks.
+     * Customized to use font awesome classes
+     * {@inheritdoc}
      */
     protected function initDefaultButtons()
     {
-        $this->initDefaultButton('view', 'eye-open'); // --- customized
+        $this->initDefaultButton('view', 'eye'); // --- customized
         $this->initDefaultButton('update', 'edit'); // --- customized
         $this->initDefaultButton('delete', 'trash', [
             'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
@@ -24,11 +25,8 @@ class ActionColumn extends \yii\grid\ActionColumn
     }
 
     /**
-     * Initializes the default button rendering callback for single button.
-     * @param string $name Button name as it's written in template
-     * @param string $iconName The part of Bootstrap glyphicon class that makes it unique
-     * @param array $additionalOptions Array of additional options
-     * @since 2.0.11
+     * Customized to use font awesome classes
+     * {@inheritdoc}
      */
     protected function initDefaultButton($name, $iconName, $additionalOptions = [])
     {
