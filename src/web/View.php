@@ -37,4 +37,53 @@ class View extends \yii\web\View
      * @var string
      */
     public $assetBundle = AppAsset::class;
+
+    /**
+     * Configuration for items to go in the side navigation. The following format can be used:
+     *
+     * ```php
+     *   [
+     *       'iconClass' => 'fas fa-newspaper',
+     *       'label' => 'Articles',
+     *       'url' => ['/article/index']
+     *   ],
+     * ```
+     */
+    public $sideNavItems = [
+        [
+            'iconClass' => 'fas fa-user',
+            'label' => 'Users',
+            'url' => ['/user']
+        ],
+        [
+            'iconClass' => 'fas fa-newspaper',
+            'label' => 'Articles',
+            'url' => ['/article']
+        ],
+        [
+            'iconClass' => 'fas fa-file',
+            'label' => 'Pages',
+            'url' => ['/page']
+        ],
+        [
+            'iconClass' => 'fas fa-sitemap',
+            'label' => 'Categories',
+            'url' => ['/category']
+        ],
+        [
+            'iconClass' => 'fas fa-tags',
+            'label' => 'Tags',
+            'url' => ['/tag']
+        ]
+    ];
+
+    /**
+     * Adds an item to the sidenav
+     * @param array $itemConfig
+     * @return void
+     */
+    public function registerSideNavItem($itemConfig)
+    {
+        $this->sideNavItems[] = $itemConfig;
+    }
 }

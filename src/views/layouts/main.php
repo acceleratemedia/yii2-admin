@@ -30,7 +30,7 @@ $this->assetBundle::register($this);
 ]); ?>
 <div class="wrapper">
     <?= CollapsibleSideNav::widget([
-        'items' => isset($this->params['sideNav']['items']) ? $this->params['sideNav']['items'] : [],
+        'items' => $this->sideNavItems,
     ]);
     ?>
     <div id="page">
