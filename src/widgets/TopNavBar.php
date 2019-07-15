@@ -54,11 +54,11 @@ class TopNavBar extends Menu
         if($this->brand === null){
             $this->brand = Yii::$app->name;
         }
-        if($this->logoutButton){
-            $this->renderLogoutButton();
-        }
         if($this->frontendLink){
             $this->renderFrontendLink();
+        }
+        if($this->logoutButton){
+            $this->renderLogoutButton();
         }
         echo Html::beginTag('nav', ['id' => 'top-nav', 'class' => 'navbar navbar-dark bg-dark']);
             echo Html::a($this->brand, ['/'], ['class' => 'navbar-brand']);
@@ -72,7 +72,14 @@ class TopNavBar extends Menu
      */
     public function renderLogoutButton()
     {
-        $this->items[] = ['label' => 'Frontend', 'url' => '/'];
+        $this->items[] = [
+            'template' => Html::beginForm(['/user/logout'], 'post')
+                . Html::submitButton(
+                    'Logout',
+                    ['class' => 'btn btn-link nav-link logout']
+                )
+                . Html::endForm()
+        ];
     }
 
     /**
@@ -82,12 +89,8 @@ class TopNavBar extends Menu
     public function renderFrontendLink()
     {
         $this->items[] = [
-            'template' => Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout',
-                    ['class' => 'btn btn-link nav-link logout']
-                )
-                . Html::endForm()
+            'label' => 'Frontend',
+            'url' => (isset(Yii::$app->frontendUrl) && !empty(Yii::$app->frontendUrl) ? Yii::$app->frontendUrl : '/')
         ];
     }
 }
