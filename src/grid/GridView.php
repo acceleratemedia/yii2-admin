@@ -29,9 +29,9 @@ class GridView extends \yii\grid\GridView
      */
     private function getItemsPerPageDropown()
     {
-        return  Html::activeDropdownList(
-            $this->filterModel,
-            'per_page',
+        return  Html::dropdownList(
+            $this->dataProvider->id.'-per-page',
+            20,
             [
                 20 => 20,
                 50 => 50,
