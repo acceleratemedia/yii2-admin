@@ -3,7 +3,6 @@
 namespace bvb\admin\web;
 
 use bvb\admin\assets\AppAsset;
-use kartik\form\Activeform;
 
 /**
  * View is an extension of Yii's web View component adding properties that
@@ -49,33 +48,7 @@ class View extends \yii\web\View
      *   ],
      * ```
      */
-    public $sideNavItems = [
-        [
-            'iconClass' => 'fas fa-user',
-            'label' => 'Users',
-            'url' => ['/user']
-        ],
-        [
-            'iconClass' => 'fas fa-newspaper',
-            'label' => 'Articles',
-            'url' => ['/article']
-        ],
-        [
-            'iconClass' => 'fas fa-file',
-            'label' => 'Pages',
-            'url' => ['/page']
-        ],
-        [
-            'iconClass' => 'fas fa-sitemap',
-            'label' => 'Categories',
-            'url' => ['/category']
-        ],
-        [
-            'iconClass' => 'fas fa-tags',
-            'label' => 'Tags',
-            'url' => ['/tag']
-        ]
-    ];
+    public $sideNavItems = [];
 
     /**
      * Adds an item to the sidenav
