@@ -7,7 +7,7 @@
 use bvb\admin\widgets\CollapsibleSideNav;
 use bvb\admin\widgets\TopNavBar;
 use bvb\admin\widgets\Toolbar;
-use common\widgets\Alert;
+use bvb\content\common\widgets\Alert;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 

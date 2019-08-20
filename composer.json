@@ -3,6 +3,7 @@
     "description": "Provides a layout and some generic functionality helpful for building admin areas",
     "type": "yii2-extension",
     "require": {
+        "brianvb/yii2-user": "*",
         "yiisoft/yii2": "^2.0",
         "kartik-v/yii2-widget-activeform": "@dev"
     },
