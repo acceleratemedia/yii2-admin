@@ -96,11 +96,19 @@ class CollapsibleSideNav extends Menu
 
 
     /**
-     * Implements an opening 'nav' tag with changea
+     * Sorts the items passed in by the value of the key 'weight'
+     * Prepends items with a button to minimize and maximize
+     * Sets the nav state of being visible or collapsed based on a cookie
+     * Adds the state of the nav to the wrapper for the nav
      * {@inheritdoc}
      */
     public function run()
     {
+        // --- Sort the items
+        usort($this->items, function($a, $b){
+            return ($a['weight'] == $b['weight']) ? 0 : ($a['weight'] < $b['weight'] ? -1 : 1);
+        });
+
         // --- Prependd an item which is the collapse button to minimize the nav
         array_unshift($this->items, [
             'template' => '<a id="sidenav-lg-minimize-btn" class="nav-link text-center sidenav-size-toggler"><i class="fa fa-exchange-alt"></i></a>'.
@@ -113,16 +121,17 @@ class CollapsibleSideNav extends Menu
         // --- If the state remains null try to get it from a cookie
         if($this->state === null && isset($_COOKIE[$this->cookieName])){
             $this->state = $_COOKIE[$this->cookieName];
-         }
+        }
 
         $this->registerJavascript();
         $tag = ArrayHelper::remove($this->wrapperOptions, 'tag', 'nav');
+
         // --- Add the state as a class to the sidenav
         $this->wrapperOptions['class'] .= ' '.$this->state;
         echo Html::beginTag($tag, $this->wrapperOptions);
         
         parent::run();
-        echo Html::endTag('nav');
+        echo Html::endTag($tag);
     }   
 
     /**
@@ -131,7 +140,6 @@ class CollapsibleSideNav extends Menu
      */
     protected function renderItems($items)
     {
-
         $n = count($items);
         $lines = [];
         foreach ($items as $i => $item) {
