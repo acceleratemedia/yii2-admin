@@ -1,9 +1,7 @@
 <?php
 
 use bvb\admin\widgets\Slugify;
-use yii\helpers\Inflector;
 
-$host_info = Yii::$app->request->getHostInfo();
 $model_form_name = strtolower($model->formName());
 ?>
 
@@ -23,7 +21,7 @@ $model_form_name = strtolower($model->formName());
                     'asButton' => true
                 ],
                 'prepend' => [
-                    'content' => 'Link: '.$host_info.'/'.Inflector::camel2id($model->formName()).'/<span id="dynamic-slug-text">'.$model->slug.'</span>'
+                    'content' => 'Link: '.$linkTextPrefix.'/<span id="dynamic-slug-text">'.$model->slug.'</span>'
                 ]
             ],
             'hintType' => \kartik\form\ActiveField::HINT_SPECIAL,
