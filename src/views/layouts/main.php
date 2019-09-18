@@ -4,10 +4,10 @@
 /* @var $content string */
 
 
+use bvb\admin\widgets\Alert;
 use bvb\admin\widgets\CollapsibleSideNav;
 use bvb\admin\widgets\TopNavBar;
 use bvb\admin\widgets\Toolbar;
-use bvb\content\common\widgets\Alert;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
