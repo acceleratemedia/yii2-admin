@@ -19,6 +19,11 @@ use Yii;
 class CollapsibleSideNav extends Menu
 {
     /**
+     * {@inheritdoc}
+     */
+    public $activateParents = true;
+
+    /**
      * Implements the attributes and markup for the collapse functionality on the labels .
      * {collapse-target-name} is replaced with a lowercased version of the label
      * {@inheritdoc}
@@ -36,7 +41,7 @@ class CollapsibleSideNav extends Menu
      * replaced with a lowercased version of the label
      * {@inheritdoc}
      */
-    public $submenuTemplate = "\n<ul id=\"{collapse-target-id}-submenu\" class=\"collapse\">\n{items}\n</ul>\n";
+    public $submenuTemplate = "\n<ul id=\"{collapse-target-id}-submenu\" class=\"collapse {possible-show}\">\n{items}\n</ul>\n";
 
     /**
      * Defaults the class to "navbar-nav" 
@@ -162,6 +167,7 @@ class CollapsibleSideNav extends Menu
                 $menu .= strtr($submenuTemplate, [
                     '{items}' => $this->renderItems($item['items']),
                     '{collapse-target-id}' => strtolower(Inflector::slug($item['label'])), // *** OUR UNIQUE ADDITION
+                    '{possible-show}' => ($item['active']) ? 'show' : ''
                 ]);
             }
             $lines[] = Html::tag($tag, $menu, $options);
