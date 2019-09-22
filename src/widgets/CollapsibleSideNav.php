@@ -141,6 +141,7 @@ class CollapsibleSideNav extends Menu
 
     /**
      * Add the {collapse-target-id} replacement on submenu templates
+     * Add {possible-show} which adda show class to parent if child item is active
      * {@inheritdoc}
      */
     protected function renderItems($items)
