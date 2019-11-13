@@ -41,6 +41,13 @@ a.desc:after {
     content: "\f162";
 }
 
+.grid-view {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .grid-view td {
     white-space: nowrap;
 }
@@ -269,6 +276,12 @@ a[data-toggle="collapse"] {
         top: 50%;
         right: 20px;
         transform: translateY(-50%);
+    }
+    #sidenav + #page{
+        width: calc(100% - 50px);
+    }
+    #sidenav.sm-maximized + #page{
+        width: calc(100% - 200px);
     }
 }
 /**
