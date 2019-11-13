@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $sourcePath = __DIR__;
+    public $sourcePath = __DIR__.'/public/';
     public $css = [
         'css/admin.css',
         'https://use.fontawesome.com/releases/v5.4.1/css/all.css'
