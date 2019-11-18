@@ -2,17 +2,19 @@
 
 namespace bvb\admin\grid;
 
+use Yii;
 use yii\helpers\Html;
 
 class GridView extends \yii\grid\GridView
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public $filterSelector = '.filter-field';
 
     /**
-     * @inheritdoc
+     * Extend default funcitonality by adding an items per page dropdown
+     * {@inheritdoc}
      */
     public function renderSummary()
     {
@@ -29,9 +31,11 @@ class GridView extends \yii\grid\GridView
      */
     private function getItemsPerPageDropown()
     {
+        echo $this->dataProvider->getPagination()->pageSizeParam;
+        echo $this->dataProvider->getPagination()->pageSize;
         return  Html::dropdownList(
-            $this->dataProvider->id.'-per-page',
-            20,
+            $this->dataProvider->getPagination()->pageSizeParam,
+            $this->dataProvider->getPagination()->pageSize,
             [
                 20 => 20,
                 50 => 50,
