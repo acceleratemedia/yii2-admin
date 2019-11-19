@@ -31,8 +31,6 @@ class GridView extends \yii\grid\GridView
      */
     private function getItemsPerPageDropown()
     {
-        echo $this->dataProvider->getPagination()->pageSizeParam;
-        echo $this->dataProvider->getPagination()->pageSize;
         return  Html::dropdownList(
             $this->dataProvider->getPagination()->pageSizeParam,
             $this->dataProvider->getPagination()->pageSize,
