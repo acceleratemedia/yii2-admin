@@ -19,7 +19,8 @@ echo $form->field($generator, 'generateRelations')->dropDownList([
 ]);
 echo $form->field($generator, 'generateLabelsFromComments')->checkbox();
 echo $form->field($generator, 'generateQuery')->checkbox();
-echo $form->field($generator, 'generateBackendRules')->checkbox(); // --- Customized
+echo $form->field($generator, 'generateBackendModel')->checkbox(); // --- Customized
+echo $form->field($generator, 'backendNs')->textInput(); // --- Customized
 echo $form->field($generator, 'queryNs');
 echo $form->field($generator, 'queryClass');
 echo $form->field($generator, 'queryBaseClass');

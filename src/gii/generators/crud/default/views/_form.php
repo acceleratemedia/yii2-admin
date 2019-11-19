@@ -20,13 +20,9 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
-/* @var $form kartik\form\ActiveForm */
-?>
 
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
 <?php foreach ($generator->getColumnNames() as $attribute) {
     if (in_array($attribute, $safeAttributes)) {
-        echo "    <?= " . $generator->generateActiveField($attribute) . " ?>\n\n";
+        echo "echo " . $generator->generateActiveField($attribute) . " ?>\n\n";
     }
 } ?>
-</div>

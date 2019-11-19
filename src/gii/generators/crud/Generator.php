@@ -16,84 +16,49 @@ use yii\web\Controller;
  */
 class Generator extends \yii\gii\generators\crud\Generator
 {
-    public $modelClass='common\models\\';
-    public $searchModelClass='backend\models\\';
+    public $modelClass='backend\models\\';
+    public $searchModelClass='backend\models\search\\';
     public $controllerClass='backend\controllers\\';
     public $viewPath = '@backend/views/';
     public $baseControllerClass = 'bvb\crud\controllers\ActiveController';
 
     /**
-     * Generates code for active field
-     * This was updated to utilize the built in form into the view component and some other things I don't recall!
-     * @param string $attribute
-     * @return string
+     * Extend to make tinyint(1) db types use checkbox fields
+     * Also use form propety of View component
+     * {@inheritdoc}
      */
     public function generateActiveField($attribute)
     {
+        $return = parent::generateActiveField($attribute);
+
         $tableSchema = $this->getTableSchema();
-        if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
-            if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
-                return "\$this->form->field(\$model, '$attribute')->passwordInput()";
-            } else {
-                return "\$this->form->field(\$model, '$attribute')";
-            }
-        }
         $column = $tableSchema->columns[$attribute];
-        if (
-            $column->phpType === 'boolean' ||
-            $column->dbType == 'tinyint(1)'
-        ) {
-            return "\$this->form->field(\$model, '$attribute')->checkbox()";
-        } elseif ($column->type === 'text') {
-            return "\$this->form->field(\$model, '$attribute')->textarea(['rows' => 6])";
-        } else {
-            if (preg_match('/^(password|pass|passwd|passcode)$/i', $column->name)) {
-                $input = 'passwordInput';
-            } else {
-                $input = 'textInput';
-            }
-            if (is_array($column->enumValues) && count($column->enumValues) > 0) {
-                $dropDownOptions = [];
-                foreach ($column->enumValues as $enumValue) {
-                    $dropDownOptions[$enumValue] = Inflector::humanize($enumValue);
-                }
-                return "\$this->form->field(\$model, '$attribute')->dropDownList("
-                    . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)).", ['prompt' => ''])";
-            } elseif ($column->phpType !== 'string' || $column->size === null) {
-                return "\$this->form->field(\$model, '$attribute')->$input()";
-            } else {
-                return "\$this->form->field(\$model, '$attribute')->$input(['maxlength' => true])";
-            }
+        if ($column->dbType == 'tinyint(1)') {
+            $return = "\$this->form->field(\$model, '$attribute')->checkbox()";
         }
+
+        // --- Use the form property of the View component
+        $return = str_replace('$form', '$this->form', $return);
+
+        return $return;
     }
 
     /**
-     * Generates column format
-     * @param \yii\db\ColumnSchema $column
-     * @return string
+     * Override to handle tinyint(1) db cols as booleab
+     * {@inheritdoc}
      */
     public function generateColumnFormat($column)
     {
-        if ($column->phpType === 'boolean'  ||
-            $column->dbType == 'tinyint(1)'
-        ) {
-            return 'boolean';
-        } elseif ($column->type === 'text') {
-            return 'ntext';
-        } elseif (stripos($column->name, 'time') !== false && $column->phpType === 'integer') {
-            return 'datetime';
-        } elseif (stripos($column->name, 'email') !== false) {
-            return 'email';
-        } elseif (stripos($column->name, 'url') !== false) {
-            return 'url';
-        } else {
-            return 'text';
-        }
+        $return = parent::generateColumnFormat($column);
+        if ($column->dbType == 'tinyint(1)'){
+            $return = 'boolean';
+        } 
+        return $return;
     }
 
     /**
-     * Generates validation rules for the search model.
-     * @return array the generated validation rules
+     * Override to include tinyint(1) fields as boolean types
+     * {@inheritdoc}
      */
     public function generateSearchRules()
     {
@@ -137,35 +102,5 @@ class Generator extends \yii\gii\generators\crud\Generator
         }
 
         return $rules;
-    }
-
-    /**
-     * Generates URL parameters
-     * @return string
-     */
-    public function generateUrlParams()
-    {
-        /* @var $class ActiveRecord */
-        $class = $this->modelClass;
-        $pks = $class::primaryKey();
-        $table_name = $this->getTableSchema()->name;
-        if (count($pks) === 1) {
-            if (is_subclass_of($class, 'yii\mongodb\ActiveRecord')) {
-                return "'id' => (string)\${$table_name}->{$pks[0]}";
-            } else {
-                return "'id' => \${$table_name}->{$pks[0]}";
-            }
-        } else {
-            $params = [];
-            foreach ($pks as $pk) {
-                if (is_subclass_of($class, 'yii\mongodb\ActiveRecord')) {
-                    $params[] = "'$pk' => (string)\${$table_name}->$pk";
-                } else {
-                    $params[] = "'$pk' => \${$table_name}->$pk";
-                }
-            }
-
-            return implode(', ', $params);
-        }
     }
 }

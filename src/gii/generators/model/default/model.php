@@ -16,11 +16,11 @@
 echo "<?php\n";
 ?>
 
-namespace <?= ($generateBackendRules ? 'backend\models' : $generator->ns); ?>;
+namespace <?= ($generateBackendModel ? $generator->backendNs : $generator->ns); ?>;
 
 use Yii;
 
-<?php if(!$generateBackendRules): // --- If we are generating backend rules we don't need this ?>
+<?php if(!$generateBackendModel): // --- If we are generating backend rules we don't need this ?>
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
  *
@@ -35,11 +35,11 @@ use Yii;
 <?php endif; ?>
  */
 <?php endif; // --- End if !generate backend rules ?>
-class <?= $className ?> extends <?= ($generateBackendRules ? '\\common\\models\\'.$className : '\\' . ltrim($generator->baseClass, '\\')) . "\n" ?>
+class <?= $className ?> extends <?= ($generateBackendModel ? '\\'.$generator->ns.'\\'.$className : '\\' . ltrim($generator->baseClass, '\\')) . "\n" ?>
 {
-<?php if(!$generateBackendRules): ?>
+<?php if(!$generateBackendModel): ?>
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -58,14 +58,14 @@ class <?= $className ?> extends <?= ($generateBackendRules ? '\\common\\models\\
 <?php endif; ?>
 <?php if($rules): ?>
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [<?= "\n            " . implode(",\n            ", $rules) . "\n        " ?>];
     }
 <?php endif; ?>
-<?php if(!$generateBackendRules): ?>
+<?php if(!$generateBackendModel): ?>
 <?php foreach ($relations as $name => $relation): ?>
 
     /**
@@ -83,7 +83,7 @@ class <?= $className ?> extends <?= ($generateBackendRules ? '\\common\\models\\
     echo "\n";
 ?>
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @return <?= $queryClassFullName ?> the active query used by this AR class.
      */
     public static function find()

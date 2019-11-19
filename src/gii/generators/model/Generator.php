@@ -13,12 +13,20 @@ use Yii;
 class Generator extends \yii\gii\generators\model\Generator
 {
     /**
-     * @var string  Custom override since we normally namespace common|frontend|backend
+     * Default namespace set to common\models
+     * @var string
      */
     public $ns = 'common\models';
 
     /**
-     * @var array  Custome list of fields we ignore rules on since they never are manually input
+     * Namespace to use for backend model creation
+     * @var string
+     */
+    public $backendNs = 'backend\models';
+
+    /**
+     * List of fields to ignore generating validation rules for
+     * @var array
      */
     public $ignoredRulesColumns = [
         'create_time',
@@ -26,9 +34,10 @@ class Generator extends \yii\gii\generators\model\Generator
     ];
 
     /**
-     * @var boolean Our shortcut for when we are generating a common model and want to generate a backend one with the rules
+     * Whether to generator a backend namespaced model
+     * @var boolean
      */
-    public $generateBackendRules = true;
+    public $generateBackendModel = true;
 
     /**
      * @inheritdoc
@@ -36,7 +45,8 @@ class Generator extends \yii\gii\generators\model\Generator
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['generateBackendRules'], 'boolean']
+            [['generateBackendModel'], 'boolean'],
+            [['backendNs'], 'string']
         ]);
     }
 
@@ -60,8 +70,8 @@ class Generator extends \yii\gii\generators\model\Generator
                 'tableSchema' => $tableSchema,
                 'properties' => $this->generateProperties($tableSchema),
                 'labels' => $this->generateLabels($tableSchema),
-                'rules' => ($this->generateBackendRules) ? null : $this->generateRules($tableSchema), // --- Customization
-                'generateBackendRules' => false,  // --- Customization
+                'rules' => ($this->generateBackendModel) ? null : $this->generateRules($tableSchema), // --- Customization
+                'generateBackendModel' => false,  // --- Customization
                 'relations' => isset($relations[$tableName]) ? $relations[$tableName] : [],
             ];
 
@@ -81,15 +91,15 @@ class Generator extends \yii\gii\generators\model\Generator
             }
 
             // --- Customization for generating backend rules
-            if ($this->generateBackendRules) {
+            if ($this->generateBackendModel) {
                 $params = [
                     'className' => $modelClassName,
                     'rules' => $this->generateRules($tableSchema),
-                    'generateBackendRules' => true
+                    'generateBackendModel' => true
                 ];
 
                 $files[] = new CodeFile(
-                    Yii::getAlias('@backend/models/') . $modelClassName . '.php',
+                    Yii::getAlias('@'.str_replace('\\', '/', $this->backendNs)) .'/'. $modelClassName . '.php',
                     $this->render('model.php', $params)
                 );
             }
@@ -99,8 +109,8 @@ class Generator extends \yii\gii\generators\model\Generator
     }
 
     /**
-     * Overrode the natural one since we don't want any labels generated
-     * @return array
+     * Override default to not generate any labels
+     * {@inheritdoc}
      */
     public function generateLabels($table)
     {
@@ -108,9 +118,8 @@ class Generator extends \yii\gii\generators\model\Generator
     }
 
     /**
-     * Generates validation rules for the specified table.
-     * @param \yii\db\TableSchema $table the table schema
-     * @return array the generated validation rules
+     * Override default to add tinyint(1) fields as boolean validation
+     * {@inheritdoc}
      */
     public function generateRules($table)
     {
