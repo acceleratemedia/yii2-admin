@@ -64,6 +64,7 @@ class View extends \yii\web\View
      */
     public function init()
     {
+        parent::init();
         Yii::configure(Yii::$app, include(__DIR__.'/../config/container.php'));
     }
 
