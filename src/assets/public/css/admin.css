@@ -152,7 +152,8 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 #sidenav ul ul a {
-    padding-left: 30px !important;
+    margin-left: 10px;
+    border-left: 1px solid;
 }
 #sidenav ul li a i {
     margin: 0 10px;
@@ -163,11 +164,17 @@ a[data-toggle="collapse"] {
     max-width: 40px;
     text-align: center;
 }
-#sidenav.lg-minimized .text{
+#sidenav.lg-minimized .navbar-nav > li > a > .text{
     display:none;
 }
+#sidenav.lg-minimized .navbar-nav ul > li{
+    text-align:left;
+}
+#sidenav.lg-minimized .navbar-nav ul > li a{
+    border:none;
+}
 #sidenav.lg-minimized ul li a i {
-    margin: 0;
+    margin: 0 5px 0 0;
 }
 #sidenav.lg-minimized .dropdown-toggle::after {
     display:none;

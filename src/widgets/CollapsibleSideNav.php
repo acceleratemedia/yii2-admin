@@ -111,6 +111,12 @@ class CollapsibleSideNav extends Menu
     {
         // --- Sort the items
         usort($this->items, function($a, $b){
+            if(!isset($a['weight'])){
+                return 1;
+            }
+            if(!isset($b['weight'])){
+                return 0;
+            }
             return ($a['weight'] == $b['weight']) ? 0 : ($a['weight'] < $b['weight'] ? -1 : 1);
         });
 
@@ -150,6 +156,10 @@ class CollapsibleSideNav extends Menu
         $lines = [];
         foreach ($items as $i => $item) {
             $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
+            // --- Add a title if there isn't one set
+            if(!isset($options['title'])){
+                $options['title'] = $item['label'];
+            }
             $tag = ArrayHelper::remove($options, 'tag', 'li');
             $class = [];
             if ($item['active']) {
@@ -184,9 +194,12 @@ class CollapsibleSideNav extends Menu
     protected function renderItem($item)
     {
         $str = parent::renderItem($item);
-        if(!empty($item['iconClass'])){
-            $str = str_replace($item['label'], '<i class="'.$item['iconClass'].'" title="'.$item['label'].'"></i><span class="text">'.$item['label'].'</span>', $str);
+        if(empty($item['iconClass'])){
+            $item['iconClass'] = 'fas fa-link';
         }
+
+        $str = str_replace($item['label'], '<i class="'.$item['iconClass'].'" title="'.$item['label'].'"></i><span class="text">'.$item['label'].'</span>', $str);
+
         if (strpos($str, '{collapse-target-name}') !== false) {
             $str = str_replace('{collapse-target-name}', strtolower(Inflector::slug($item['label'])), $str);
         }
