@@ -12,13 +12,13 @@ $nameAttribute = $generator->getNameAttribute();
 echo "<?php\n";
 ?>
 
-use bvb\admin\grid\ActionColumn;
-use <?= $generator->indexWidgetType === 'grid' ? "bvb\\admin\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+use bvb\admin\grid\ActionColumn;
+use <?= $generator->indexWidgetType === 'grid' ? "bvb\\admin\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
+use yii\helpers\Html;
 
 $this->toolbar['buttons'] = Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, ['create'], ['class' => 'btn btn-success']);
 
