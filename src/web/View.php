@@ -3,6 +3,7 @@
 namespace bvb\admin\web;
 
 use bvb\admin\assets\AppAsset;
+use bvb\admin\widgets\Toolbar;
 use Yii;
 
 /**
@@ -26,9 +27,11 @@ class View extends \yii\web\View
      * The 'page' area of the default layout has the option of a toolbar being
      * at the top. By providing this as a variable on the view component we can
      * configure it along with the form across views as well as in actions.
-     * @var \kartik\form\ActiveForm
+     * @var \bvb\admin\widgets\Toolbar
      */
-    public $toolbar;
+    public $toolbar = [
+        'class' => Toolbar::class
+    ];
 
     /**
      * The name of the asset bundle which will be registered in the layout file.
