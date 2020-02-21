@@ -2,7 +2,7 @@
 
 use bvb\admin\widgets\Slugify;
 
-$model_form_name = strtolower($model->formName());
+$modelFormName = strtolower($model->formName());
 ?>
 
 <div class="name-slug-container">
@@ -11,7 +11,9 @@ $model_form_name = strtolower($model->formName());
     </div>
 
     <div class="slug-container">
-        <?= $form->field($model, 'slug', [
+        <?php
+        $slugHint = (isset($model->attributeHints()['slug']) ? $model->attributeHints()['slug'] : 'Unique string to identify this object usually for SEO friendly URLs');
+        echo $form->field($model, 'slug', [
             'options' => [
                 'class' => 'slug-field-container'
             ],
@@ -29,27 +31,27 @@ $model_form_name = strtolower($model->formName());
                 'iconBesideInput' => true,
                 'inputTemplate' => '{input}{help}',
             ]
-        ])->textInput(['maxlength' => true]) ?>
+        ])->hint($slugHint)->textInput(['maxlength' => true]) ?>
     </div>
 </div>
 
 <?php
 // --- Slugify the name
 Slugify::widget([
-    'generating_input_id' => $model_form_name.'-name',
-    'slug_receiving_input_id' => $model_form_name.'-slug',
+    'generating_input_id' => $modelFormName.'-name',
+    'slug_receiving_input_id' => $modelFormName.'-slug',
 ]);
 
-$ready_js = <<<JS
+$readyJs = <<<JAVASCRIPT
 $("body").on("click", ".slug-field-container .btn", function(e){
     $("#dynamic-slug-text, .slug-field-container .btn").fadeOut(300, function(e){
         $(".slug-field-container input").fadeIn();
     });
 })
 
-$("body").on("change", "#{$model_form_name}-slug", function(e){
+$("body").on("change", "#{$modelFormName}-slug", function(e){
     $("#dynamic-slug-text").text($(this).val());
 })
-JS;
+JAVASCRIPT;
 
-$this->registerJs($ready_js);
+$this->registerJs($readyJs);
