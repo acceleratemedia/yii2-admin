@@ -158,6 +158,10 @@ a[data-toggle="collapse"] {
 #sidenav ul li a i {
     margin: 0 10px;
 }
+#sidenav ul li:not(:first-of-type) a i {
+    width:1.2rem;
+    text-align: center;
+}
 
 #sidenav.lg-minimized {
     min-width: 40px;
