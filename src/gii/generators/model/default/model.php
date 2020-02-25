@@ -34,6 +34,11 @@ use Yii;
 <?php endforeach; ?>
 <?php endif; ?>
  */
+<?php else: // --- End if !generate backend rules ?>
+/**
+ * Model with rules for backend functionality
+ * {@inheritdoc}
+ */
 <?php endif; // --- End if !generate backend rules ?>
 class <?= $className ?> extends <?= ($generateBackendModel ? '\\'.$generator->ns.'\\'.$className : '\\' . ltrim($generator->baseClass, '\\')) . "\n" ?>
 {
