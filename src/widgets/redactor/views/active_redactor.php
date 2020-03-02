@@ -9,7 +9,7 @@ echo $form->field($model, $attribute, [
             'class' => 'form-group redactor-field-container'
         ]
     ])->widget(
-        Redactor::className(), 
+        Redactor::class, 
         [
             'model' => $model,
             'attribute' => $attribute,
