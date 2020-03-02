@@ -29,7 +29,7 @@ class ActiveRedactor extends Widget
      */
     public function run()
     {
-        $this->registerInlineCss();
+        self::registerInlineCss();
         return $this->render('active_redactor', [
             'form' => $this->form,
             'model' => $this->model,
@@ -39,9 +39,11 @@ class ActiveRedactor extends Widget
 
     /**
      * Registers the inline CSS to the page for the redactor
+     * This function is static because other widgets might want to register this 
+     * CSS to use the style
      * @return void
      */
-    public function registerInlineCss()
+    static function registerInlineCss()
     {
         $css = <<<CSS
 .redactor-container {
@@ -59,7 +61,7 @@ class ActiveRedactor extends Widget
 }
 CSS;
 
-        $this->getView()->registerCss( preg_replace('/\s+/', '', $css) );
+        Yii::$app->getView()->registerCss( preg_replace('/\s+/', '', $css), [], 'active-redactor-css' );
     }
 }
 ?>
