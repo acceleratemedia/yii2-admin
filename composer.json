@@ -29,7 +29,7 @@
         {
             "type": "vcs",
             "url" : "git@github.com:BrianVB/yii2-crud.git"
-        },,
+        },
         {
             "type": "vcs",
             "url" : "git@github.com:BrianVB/yii2-user.git"
