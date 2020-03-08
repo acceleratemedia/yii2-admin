@@ -3,9 +3,12 @@ namespace bvb\admin\widgets\redactor;
 
 use yii\base\Widget;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
- * Custom widget with styles and desired configuration for redactor
+ * Implement yii\redactor\widgets\Redactor inside of a container so that it may
+ * grow and increase in size but not beyond a limit and stay in that container
+ * while scrolling
  */
 class ActiveRedactor extends Widget
 {
@@ -25,15 +28,25 @@ class ActiveRedactor extends Widget
     public $attribute;
 
     /**
+     * Passed through to yii\redactor\widgets\Redactor::$clientOptions
+     * @var array
+     */
+    public $clientOptions;
+
+    /**
      * @inheritdoc
      */
     public function run()
     {
         self::registerInlineCss();
+        $defaultOptions = [
+            'toolbarFixedTarget' => '#redactor-'.$this->attribute.'-container',
+        ];
         return $this->render('active_redactor', [
             'form' => $this->form,
             'model' => $this->model,
-            'attribute' => $this->attribute
+            'attribute' => $this->attribute,
+            'clientOptions' => ArrayHelper::merge($this->clientOptions, $defaultOptions)
         ]);
     }
 
@@ -47,7 +60,7 @@ class ActiveRedactor extends Widget
     {
         $css = <<<CSS
 .redactor-container {
-    max-height: 500px;
+    max-height: 800px;
     overflow: auto;
 }
 .redactor-field-container{

@@ -1,5 +1,11 @@
 <?php
 
+/* @var $clientOptions array */
+/* @var $form \yii\widgets\ActiveForm */
+/* @var $model \yii\base\Model */
+/* @var $attribtue string */
+
+
 use yii\redactor\widgets\Redactor;
 use yii\helpers\Html;
 
@@ -13,8 +19,6 @@ echo $form->field($model, $attribute, [
         [
             'model' => $model,
             'attribute' => $attribute,
-            'clientOptions' => [
-                'toolbarFixedTarget' => '#redactor-'.$attribute.'-container'
-            ]
+            'clientOptions' => $clientOptions
         ]
 );
