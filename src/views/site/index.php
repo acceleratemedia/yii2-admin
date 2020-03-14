@@ -2,52 +2,64 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->toolbar = null;
+$this->title = 'Backend';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
         <h1>Congratulations!</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">You have successfully created your application.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
+        <p>To change the default page from this one to one of your choosing, create a controller and configure the <code>defaultRoute</code> property of your application configuration. For example, if you would like to create a dashboard page with helpful links in your application you can do the following:</p>
+        <p>Create <code>@app/controllers/DashboardController.php</code>:</p>
 
-    <div class="body-content">
+        <p>In <code>@app/config/main.php</code>:</p>
+        <pre><code>
+return [
+    ...
+    'defaultRoute' => 'dashboard/index',
+    ...
+];
+        </code></pre>
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+        <p>In <code>@app/controllers/DashboardController.php</code>:</p>
+        <pre><code>
+<?= htmlentities('<?php'); ?>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+namespace backend\controllers;
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+use yii\web\Controller;
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+class DashboardController extends Controller
+{
+    /**
+     * Display helpful links for navigating the application
+     * @return string
+     */
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
+}
+        </code></pre>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+        <p>In <code>@app/views/dashboard/index.php</code>:</p>
+        <pre><code>
+<?= htmlentities('<?php'); ?>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+/* @var $this \yii\web\View */
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
+$this->title = Yii::$app->name;
+?>
+<p>Now you can enter your own content here</p>
+        </code></pre>
     </div>
 </div>
+<style>
+pre{
+background-color:#fff;
+padding-left:10px;
+}
+</style>
