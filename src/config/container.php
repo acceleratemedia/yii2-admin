@@ -29,7 +29,7 @@ return [
                 'pluginOptions' => [
                     'autoclose' => true,
                     'todayBtn' => true,
-                    'format' => 'yyyy-mm-dd hh:mm:ss'
+                    'format' => 'yyyy-mm-dd hh:ii:ss'
                 ]
             ],
         ]
