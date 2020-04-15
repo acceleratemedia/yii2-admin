@@ -2,6 +2,7 @@
 
 namespace bvb\admin\grid;
 
+use yii\bootstrap4\Dropdown;
 use Yii;
 use yii\helpers\Html;
 
@@ -10,6 +11,14 @@ use yii\helpers\Html;
  */
 class ActionColumn extends \yii\grid\ActionColumn
 {
+    /**
+     * Set to true to display links in a popover. If this is set to true it will
+     * use the order left to right in [[template]] of the buttons to render them
+     * top to bottom and anything else in [[template]] is ignored
+     * @var boolean
+     */
+    public $linksInDropdown = false;
+
     /**
      * Customized to use font awesome classes
      * {@inheritdoc}
@@ -54,5 +63,35 @@ class ActionColumn extends \yii\grid\ActionColumn
                 return Html::a($icon, $url, $options);
             };
         }
+    }
+
+    /**
+     * If [[linksInDropdown]] is set to true, render the links in a dropdown
+     * displayed to the left
+     * {@inheritdoc}
+     */
+    protected function renderDataCellContent($model, $key, $index)
+    {
+        if($this->linksInDropdown){
+            $content = parent::renderDataCellContent($model, $key, $index);
+            preg_match_all('#(.+?</a>)#', $content, $links);
+            $dropdownItems = [];
+            foreach($links[0] as $link){
+                $dropdownItems[] = '<div class="dropdown-item">'.$link.'</div>';
+            }
+            $dropdownMenu = Dropdown::widget([
+                'items' => $dropdownItems
+            ]);
+return <<<HTML
+<div class="btn-group dropleft">
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Actions
+    </button>
+    $dropdownMenu
+</div>
+HTML;
+
+        }
+        return parent::renderDataCellContent($model, $key, $index);
     }
 }
