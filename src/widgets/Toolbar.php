@@ -30,16 +30,16 @@ class Toolbar extends Widget
     ];
 
     /**
-     * Buttons to be rendered in the right side of the toolbar
-     * @var string
+     * Widgets to be rendered in the right side of the toolbar
+     * @var array
      */
-    public $buttons;
+    public $widgets = [];
 
     /**
      * Configuration options for the title. If set to false or null will use title property raw
      * @var array
      */
-    public $buttonContainer = [
+    public $widgetsContainer = [
         'tag' => 'div',
         'options' => [
             'class' => 'btn-toolbar mb-2 mb-md-0'
@@ -50,7 +50,7 @@ class Toolbar extends Widget
      * Template used to adjust layout of elements
      * @var string
      */
-    public $template = '{title}{buttons}';
+    public $template = '{title}{widgets}';
 
     /**
      * 
@@ -68,10 +68,18 @@ class Toolbar extends Widget
             $parts['{title}'] = Html::tag($tag, $parts['{title}'], $this->titleTag['options']);
         }
 
-        $parts['{buttons}'] = $this->buttons;
-        if(!empty($this->buttonContainer) && !empty($parts['{buttons}'])){
-            $tag = ArrayHelper::remove($this->buttonContainer, 'tag');
-            $parts['{buttons}'] = Html::tag($tag, $parts['{buttons}'], $this->buttonContainer['options']);
+        $parts['{widgets}'] = '';
+        foreach($this->widgets as $widget){
+            if(is_array($widget)){
+                $parts['{widgets}'] .= Yii::createObject($widget)->run();    
+            } else {
+                $parts['{widgets}'] .= $widget;
+            }
+            
+        }
+        if(!empty($this->widgetsContainer) && !empty($parts['{widgets}'])){
+            $tag = ArrayHelper::remove($this->widgetsContainer, 'tag');
+            $parts['{widgets}'] = Html::tag($tag, $parts['{widgets}'], $this->widgetsContainer['options']);
         }
 
         $content = strtr($this->template, $parts);

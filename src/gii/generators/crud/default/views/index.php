@@ -20,7 +20,7 @@ use bvb\admin\grid\ActionColumn;
 use <?= $generator->indexWidgetType === 'grid' ? "bvb\\admin\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
 use yii\helpers\Html;
 
-$this->toolbar['buttons'] = Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, ['create'], ['class' => 'btn btn-success']);
+$this->toolbar['widgets'][] = Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, ['create'], ['class' => 'btn btn-success']);
 
 <?php if ($generator->indexWidgetType === 'grid'): ?>
 <?= "echo " ?>GridView::widget([
