@@ -3,11 +3,9 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-
 use bvb\admin\widgets\Alert;
 use bvb\admin\widgets\CollapsibleSideNav;
 use bvb\admin\widgets\TopNavBar;
-use bvb\admin\widgets\Toolbar;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
@@ -42,8 +40,7 @@ $this->assetBundle::register($this);
             echo Html::beginForm($this->form->action, $this->form->method, $this->form->options);
         }
         if($this->toolbar){
-            $toolbarClass = ArrayHelper::remove($this->form, 'class', Toolbar::class);
-            echo $toolbarClass::widget($this->toolbar);
+            echo Yii::createObject($this->toolbar)->run();
         }
         echo Alert::widget();
         
