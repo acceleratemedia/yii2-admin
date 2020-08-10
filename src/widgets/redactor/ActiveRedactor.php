@@ -1,53 +1,34 @@
 <?php
 namespace bvb\admin\widgets\redactor;
 
-use yii\base\Widget;
 use Yii;
+use yii\helpers\Html;
+use yii\base\Widget;
 use yii\helpers\ArrayHelper;
+use yii\redactor\widgets\Redactor;
 
 /**
- * Implement yii\redactor\widgets\Redactor inside of a container so that it may
- * grow and increase in size but not beyond a limit and stay in that container
- * while scrolling
+ * Exteneds [[yii\redactor\widgets\Redactor]] to render it inside of a container
+ * so that it may grow and increase in size but not beyond a limit and stay in
+ * that container while scrolling
  */
-class ActiveRedactor extends Widget
+class ActiveRedactor extends Redactor
 {
     /**
-     * @var \yii\widgets\ActiveForm
-     */
-    public $form;
-
-    /**
-     * @var \yii\db\ActiveRecord
-     */
-    public $model;
-
-    /**
-     * @var string
-     */
-    public $attribute;
-
-    /**
-     * Passed through to yii\redactor\widgets\Redactor::$clientOptions
-     * @var array
-     */
-    public $clientOptions;
-
-    /**
-     * @inheritdoc
+     * Render a container around the parent implementation
+     * {@inheritdoc}
      */
     public function run()
     {
         self::registerInlineCss();
+        $containerId = (isset($this->options['id']) && !empty($this->options['id'])) ? $this->options['id'] : $this->getId();
         $defaultOptions = [
-            'toolbarFixedTarget' => '#redactor-'.$this->attribute.'-container',
+            'toolbarFixedTarget' => '#'.$containerId.'-redactor-container',
         ];
-        return $this->render('active_redactor', [
-            'form' => $this->form,
-            'model' => $this->model,
-            'attribute' => $this->attribute,
-            'clientOptions' => ArrayHelper::merge($this->clientOptions, $defaultOptions)
-        ]);
+        $this->options = ArrayHelper::merge($defaultOptions, $this->options);
+        echo '<div id="'.$containerId.'-redactor-container" class="redactor-container">';
+        parent::run();
+        echo '</div>';
     }
 
     /**
