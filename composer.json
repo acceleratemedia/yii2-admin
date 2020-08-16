@@ -6,7 +6,6 @@
         "brianvb/yii2-crud": "@dev",
         "brianvb/yii2-user": "@dev",
         "kartik-v/yii2-widget-activeform": "@dev",
-        "yiidoc/yii2-redactor": "*",
         "yiisoft/yii2": "^2.0",
         "yiisoft/yii2-bootstrap4": "*"
     },
