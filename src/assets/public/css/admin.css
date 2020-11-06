@@ -144,7 +144,7 @@ a[data-toggle="collapse"] {
     max-width: 200px;
     transition: all 0.3s;
 }
-.dropdown-toggle::after {
+#sidenav .dropdown-toggle::after {
     display: block;
     position: absolute;
     top: 50%;
