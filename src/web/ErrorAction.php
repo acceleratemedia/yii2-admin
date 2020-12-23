@@ -16,7 +16,8 @@ class ErrorAction extends \yii\web\ErrorAction
     public function init()
     {
         parent::init();
-        Yii::$app->view->form = null;
-        Yii::$app->view->toolbar = null;
+        Yii::setAlias("@bvb-admin", __DIR__.'/../');
+        Yii::$app->layout = '@bvb-admin/views/layouts/base';
+        Yii::$app->view->params['bodyClass'] = 'text-center p-5 m-5';
     }
 }

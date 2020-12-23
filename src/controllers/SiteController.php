@@ -1,9 +1,9 @@
 <?php
 namespace bvb\admin\controllers;
 
-use bvb\user\backend\controllers\traits\AdminAccess;
 use bvb\admin\web\ErrorAction;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 /**
@@ -12,12 +12,26 @@ use yii\web\Controller;
 class SiteController extends Controller
 {
     /**
-     * Implement AccessControl that requires admin role to access actions
+     * {@inheritdoc}
      */
-    use AdminAccess;
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'except' => ['error'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ]
+        ];
+    }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function actions()
     {

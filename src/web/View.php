@@ -68,6 +68,7 @@ class View extends \yii\web\View
     public function init()
     {
         parent::init();
+        Yii::setAlias('@bvb-admin', __DIR__.'/../');
         Yii::configure(Yii::$app, include(__DIR__.'/../config/container.php'));
     }
 

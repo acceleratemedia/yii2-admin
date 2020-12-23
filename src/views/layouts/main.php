@@ -9,21 +9,9 @@ use bvb\admin\widgets\TopNavBar;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-$this->assetBundle::register($this);
-?>
-<?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body>
-<?php $this->beginBody() ?>
-<?= TopNavBar::widget([
+$this->beginContent('@bvb-admin/views/layouts/base.php');
+
+echo TopNavBar::widget([
     'items' => isset($this->params['topNavBar']['items']) ? $this->params['topNavBar']['items'] : []
 ]); ?>
 <div class="wrapper">
@@ -57,8 +45,4 @@ $this->assetBundle::register($this);
         ?>
     </div>
 </div>
-
-<?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage() ?>
+<?php $this->endContent(); ?>
