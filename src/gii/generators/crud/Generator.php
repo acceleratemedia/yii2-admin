@@ -7,7 +7,6 @@ use yii\db\BaseActiveRecord;
 use yii\db\Schema;
 use yii\gii\CodeFile;
 use yii\helpers\Inflector;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 /**
