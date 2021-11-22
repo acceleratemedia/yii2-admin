@@ -3,8 +3,8 @@
     "description": "Provides a layout and some generic functionality helpful for building admin areas",
     "type": "yii2-extension",
     "require": {
-        "brianvb/yii2-crud": "@dev",
-        "brianvb/yii2-user": "@dev",
+        "acceleratemedia/yii2-crud": "@dev",
+        "acceleratemedia/yii2-user": "@dev",
         "kartik-v/yii2-widget-activeform": "@dev",
         "yiisoft/yii2": "^2.0",
         "yiisoft/yii2-bootstrap4": "*"
@@ -28,11 +28,11 @@
         },
         {
             "type": "vcs",
-            "url" : "git@github.com:BrianVB/yii2-crud.git"
+            "url" : "git@github.com:acceleratemedia/yii2-crud.git"
         },
         {
             "type": "vcs",
-            "url" : "git@github.com:BrianVB/yii2-user.git"
+            "url" : "git@github.com:acceleratemedia/yii2-user.git"
         }
     ]
 }
