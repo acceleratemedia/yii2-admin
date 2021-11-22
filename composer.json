@@ -1,5 +1,5 @@
 {
-    "name": "brianvb/yii2-admin",
+    "name": "acceleratemedia/yii2-admin",
     "description": "Provides a layout and some generic functionality helpful for building admin areas",
     "type": "yii2-extension",
     "require": {
